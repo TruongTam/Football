@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Club";
+}
+
+<h1>Câu Lạc Bộ</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên Câu Lạc Bộ
+            </th>
+            <th>
+                Tỉnh
+            </th>
+            <th>
+                Sân
+            </th>
+            <th>
+                Địa Chỉ Sân
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Province
+            </td>
+            <td>
+                @item.Pitch
+            </td>
+            <td>
+                @item.AddProvince
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.Maclb">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Maclb">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Maclb">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

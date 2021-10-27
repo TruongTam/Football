@@ -46,6 +46,33 @@ namespace FootballManaga.Controllers
             };
             return View(listMatch);
         }
+
+        public IActionResult Club()
+        {
+            var x = context.Caulacbo.Join(context.Tinh,
+                c => c.Matinh,
+                t => t.Matinh,
+                (c, t) => new
+                {
+                    Id = c.Maclb,
+                    Name = c.Tenclb,
+                    Province = t.Tentinh,
+                    IdP = c.Masan
+                }
+                ).Join(context.Sanvd,
+                i => i.IdP,
+                s => s.Masan,
+                (i, s) => new Club
+                {
+                    Id = i.Id,
+                    Name = i.Name,
+                    Province = i.Province,
+                    Pitch = s.Tensan,
+                    AddProvince = s.Diachi
+                }
+                ).ToList();
+            return View(x);
+        }
        public IQueryable<IndexModelsViews> GetList()
         {
             var indexliss = context.Bangxh.Join(context.Caulacbo,
