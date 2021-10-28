@@ -1,0 +1,115 @@
+﻿
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    <div>Bảng Xếp Hạng</div> <div><input id="search" type="text" /></div>
+</p>
+@if (ViewBag.check == "")
+{
+<table class="table" id="table">
+
+
+    </table><div> No Have</div>            }
+else {
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        @if (string.IsNullOrEmpty(ViewBag.tye))
+                        {
+                            ViewBag.type = "UName";
+                        }
+                        @if (ViewBag.type == "UName")
+                        {
+                            <i class='fas fa-arrow-alt-circle-down'></i>
+                            <a asp-action="Sort" asp-route-type="DName">Tên</a>
+                        }
+                        else
+                        {
+                            if (ViewBag.type == "DName")
+                            {
+                                <i class='fas fa-arrow-alt-circle-up'></i>
+                                <a asp-action="Sort" asp-route-type="UName">Tên</a>
+                            }
+
+                        }
+
+                    </th>
+                    <th>
+                        Huấn Luyện Viên
+                    </th>
+                    <th>
+                        Thắng
+                    </th>
+                    <th> Thua</th>
+                    <th> Diểm</th>
+                    <th>
+                        @if (string.IsNullOrEmpty(ViewBag.type1))
+                        {
+                            ViewBag.type1 = "URank";
+                        }
+                        @if (ViewBag.type1 == "URank")
+                        {
+                            <i class='fas fa-arrow-alt-circle-down'></i>
+                            <a asp-action="Sort" asp-route-type="DRank">Xếp Hạng</a>
+                        }
+                        else
+                        {
+                            if (ViewBag.type1 == "DRank")
+                            {
+                                <i class='fas fa-arrow-alt-circle-up'></i>
+                                <a asp-action="Sort" asp-route-type="URank">Xếp Hạng</a>
+                            }
+
+                        }
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.IndexModelsViews)
+                {
+                    <tr>
+                        <td>
+                            @item.NameClub
+                        </td>
+                        <td>
+                            @item.NameLead
+                        </td>
+                        <td>
+                            @item.Mwin
+                        </td>
+                        <td>
+                            @item.Mlost
+                        </td>
+                        <td>
+                            @item.Point
+                        </td>
+                        <td>
+                            @item.Rank
+                        </td>
+                        <td>
+                            @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <div>
+                <table>
+                    <tbody>
+                        @foreach (var i in Model.caulacbos)
+                        {
+                            <tr>
+                                <td>
+                                    @i.Tenclb
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </table>
+}

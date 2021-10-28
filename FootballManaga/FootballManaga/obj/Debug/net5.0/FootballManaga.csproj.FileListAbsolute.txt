@@ -147,3 +147,4 @@ E:\Dot Net MVC\Football\FootballManaga\FootballManaga\obj\Debug\net5.0\Razor\Vie
 E:\Dot Net MVC\Football\FootballManaga\FootballManaga\obj\Debug\net5.0\Razor\Views\Shared\footer.cshtml.g.cs
 E:\Dot Net MVC\Football\FootballManaga\FootballManaga\obj\Debug\net5.0\Razor\Views\Home\Sort.cshtml.g.cs
 E:\Dot Net MVC\Football\FootballManaga\FootballManaga\obj\Debug\net5.0\Razor\Views\Home\Club.cshtml.g.cs
+E:\Dot Net MVC\Football\FootballManaga\FootballManaga\obj\Debug\net5.0\Razor\Views\Home\Search.cshtml.g.cs

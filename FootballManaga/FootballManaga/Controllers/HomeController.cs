@@ -73,6 +73,25 @@ namespace FootballManaga.Controllers
                 ).ToList();
             return View(x);
         }
+        [HttpPost]
+        public IActionResult Search(string name)
+        {
+            ViewBag.check = "";
+           
+            if (string.IsNullOrEmpty(name))
+            {
+                 ViewBag.check= name;
+            }
+            var indexModels = GetList().Where(c => c.NameClub.Contains(name) || c.NameLead.Contains(name));
+            var clb = context.Caulacbo.ToList();
+
+
+            return View( new ListMatch
+            {
+                IndexModelsViews = indexModels.ToList(),
+                caulacbos = clb
+            }) ;
+        }
        public IQueryable<IndexModelsViews> GetList()
         {
             var indexliss = context.Bangxh.Join(context.Caulacbo,

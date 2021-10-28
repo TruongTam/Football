@@ -9,10 +9,11 @@
 
 <p>
     @*<a asp-action="Create">Create New</a>*@
-    <div>Bảng Xếp Hạng</div> <div><input type="text" /></div>
+    <div>Bảng Xếp Hạng</div> <div><input id="search" type="text" /></div>
 </p>
+<script src="~/js/ajax.js"></script>">
 
-<table class="table">
+<table class="table" id="table">
     <thead>
         <tr>
             <th>

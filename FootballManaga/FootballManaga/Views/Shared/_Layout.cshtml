@@ -40,12 +40,14 @@
     </div>
 
     <footer class="border-top footer text-muted">
-       @Html.Partial("footer.cshtml");
+        @Html.Partial("footer.cshtml");
     </footer>
     <script>
-        $('#example').tooltip(options)
+       
     </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/ajax.js" />
+    <script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js" />
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
