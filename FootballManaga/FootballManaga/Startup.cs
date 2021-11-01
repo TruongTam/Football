@@ -53,13 +53,27 @@ namespace FootballManaga
             app.UseRouting();
 
             app.UseAuthorization();
+       
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                  name: "ADMIN",
+                  pattern: "AD/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
+      
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Home",
+                    pattern: "Home/Index/{id?}");
+            });
+            
         }
     }
 }

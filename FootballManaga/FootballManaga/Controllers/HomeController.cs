@@ -14,19 +14,46 @@ namespace FootballManaga.Controllers
     {
         private readonly QLBongDaContext context;
         public HomeController(QLBongDaContext daContext) => context= daContext;
-        public IActionResult Index() {
+        public IActionResult Index(string type) {
+            type = "UName";
+            string type1 = "URank";
+            ViewBag.type = type;
+            ViewBag.type1 = type1;
             var rs = GetList().OrderByDescending(x=>x.Rank);
             var clb = context.Caulacbo.ToList().OrderByDescending(x => x.Tenclb);
-            ListMatch listMatch = new ListMatch
+            switch (type)
             {
-                IndexModelsViews = rs.ToList(),
-                caulacbos = clb.ToList()
-            };
-
-            return View(listMatch);
+                case "UName": return View("Index", Sort("UName"));
+                    break;
+                case "DName": return View("Index", Sort("DName"));
+                    break;
+                case "URank": return View("Index", Sort("URank"));
+                    break;
+                case "DRank": return View("Index", Sort("DRank"));
+                    break;
+                case ""     :
+                    return View("Index", new ListMatch
+                    {
+                        IndexModelsViews = rs.ToList(),
+                        caulacbos = clb.ToList()
+                    });
+                   
+            }
+            return View("Index", Search(type));
         }
-       [HttpGet]
-        public IActionResult Sort(string type)
+        public IActionResult AddClub()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult AddClub(Club club)
+        {
+            //Club clubN = new Club(club.Id, club.Name, club.Pitch, club.Province, club.AddProvince);
+            club.addClub(club.Id, club.Name, club.Pitch, club.Province, club.AddProvince);
+
+            return View();
+        }
+        public ListMatch Sort(string type)
         {
             var x= new List<IndexModelsViews>();
 
@@ -34,19 +61,15 @@ namespace FootballManaga.Controllers
             if (type == "URank") { x=GetList().OrderBy(x => x.Rank).ToList(); }
             if (type == "DName") { x=GetList().OrderByDescending(x => x.NameClub).ToList(); }
             if (type == "DRank") { x=GetList().OrderByDescending(x => x.Rank).ToList(); }
-            type = "UName";
-            string type1 = "URank";
-            ViewBag.type = type;
-            ViewBag.type1 = type1;
             var clb = context.Caulacbo.ToList();
             ListMatch listMatch = new ListMatch
             {
                 IndexModelsViews = x,
                 caulacbos = clb
             };
-            return View(listMatch);
+            return listMatch;
         }
-
+        
         public IActionResult Club()
         {
             var x = context.Caulacbo.Join(context.Tinh,
@@ -63,18 +86,24 @@ namespace FootballManaga.Controllers
                 i => i.IdP,
                 s => s.Masan,
                 (i, s) => new Club
-                {
-                    Id = i.Id,
-                    Name = i.Name,
-                    Province = i.Province,
-                    Pitch = s.Tensan,
-                    AddProvince = s.Diachi
-                }
+                (
+                    i.Id,
+                    i.Name,
+                    i.Province,
+                    s.Tensan,
+                    s.Diachi
+                )
                 ).ToList();
-            return View(x);
+            return View(demo(x));
         }
-        [HttpPost]
-        public IActionResult Search(string name)
+        public List<Club> demo(List<Club> a)
+        {
+            return a.OrderByDescending(x => x.Name).ToList();
+        }
+
+
+     
+        public ListMatch Search(string name)
         {
             ViewBag.check = "";
            
@@ -86,12 +115,14 @@ namespace FootballManaga.Controllers
             var clb = context.Caulacbo.ToList();
 
 
-            return View( new ListMatch
+            return new ListMatch
             {
                 IndexModelsViews = indexModels.ToList(),
                 caulacbos = clb
-            }) ;
+            };
         }
+        
+
        public IQueryable<IndexModelsViews> GetList()
         {
             var indexliss = context.Bangxh.Join(context.Caulacbo,

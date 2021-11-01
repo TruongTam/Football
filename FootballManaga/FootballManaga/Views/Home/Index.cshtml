@@ -11,30 +11,31 @@
     @*<a asp-action="Create">Create New</a>*@
     Bảng Xếp Hạng
 </p>
-<table class="table">
+<table class="table" id="table">
     <thead>
         <tr>
             <th>
-                @if (string.IsNullOrEmpty(ViewBag.tye))
+                @if (string.IsNullOrEmpty(ViewBag.type))
                 {
                     ViewBag.type = "UName";
                 }
                 @if (ViewBag.type == "UName")
                 {
                     <i class='fas fa-arrow-alt-circle-down'></i>
-                    <a asp-action="Sort" asp-route-type="DName">Tên</a>
+                    <a asp-action="Index" asp-route-type="DName">Tên</a>
                 }
                 else
                 {
                     if (ViewBag.type == "DName")
                     {
                         <i class='fas fa-arrow-alt-circle-up'></i>
-                        <a asp-action="Sort" asp-route-type="UName">Tên</a>
+                        <a asp-action="Index" asp-route-type="UName">Tên</a>
                     }
 
                 }
 
-                    </th>
+
+            </th>
             <th>
                 Huấn Luyện Viên
             </th>
@@ -51,19 +52,19 @@
                 @if (ViewBag.type1 == "URank")
                 {
                     <i class='fas fa-arrow-alt-circle-down'></i>
-                    <a asp-action="Sort" asp-route-type="DRank">Xếp Hạng</a>
+                    <a asp-action="Index" asp-route-type="DRank">Xếp Hạng</a>
                 }
                 else
                 {
                     if (ViewBag.type1 == "DRank")
                     {
                         <i class='fas fa-arrow-alt-circle-up'></i>
-                        <a asp-action="Sort" asp-route-type="URank">Xếp Hạng</a>
+                        <a asp-action="Index" asp-route-type="URank">Xếp Hạng</a>
                     }
 
                 }
             </th>
-           
+
         </tr>
     </thead>
     <tbody>
@@ -100,14 +101,14 @@
     <div>
         <table>
             <tbody>
-                @foreach(var i in Model.caulacbos)
-            {
-                <tr>
-                    <td>
-                        @i.Tenclb
-                    </td>
-                </tr>
-            }
+                @foreach (var i in Model.caulacbos)
+                {
+                    <tr>
+                        <td>
+                            @i.Tenclb
+                        </td>
+                    </tr>
+                }
             </tbody>
 
         </table>
